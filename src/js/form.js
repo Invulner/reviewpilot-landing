@@ -25,6 +25,18 @@ window.addEventListener('load', (e) => {
     emailInput.classList.remove('invalid')
   }
 
+  function showModal() {
+    $(modal).modal('show')
+  }
+
+  function setHeroEmailInForm() {
+    var heroEmail = heroEmailInput.value
+
+    if (heroEmail) {
+      emailInput.value = heroEmail
+    }
+  }
+
   function submitForm() {
     turnOnLoadingMode()
 
@@ -57,11 +69,14 @@ window.addEventListener('load', (e) => {
     }
   })
 
-  heroModalBtn.addEventListener('click', (event) => {
-    var heroEmail = heroEmailInput.value
+  heroModalBtn.addEventListener('click', setHeroEmailInForm)
 
-    if (heroEmail) {
-      emailInput.value = heroEmail
+  heroEmailInput.addEventListener('keypress', (event) => {
+    var keyCode = event.keyCode || event.which
+
+    if (keyCode == '13') {
+      setHeroEmailInForm()
+      showModal()
     }
   })
 
