@@ -1,5 +1,3 @@
-//= require jquery/dist/jquery.js
-
 var winWidth = window.innerWidth
 var bodyWidth = $('body').innerWidth()
 var rightPadding = winWidth - bodyWidth

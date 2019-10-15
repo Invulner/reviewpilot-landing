@@ -1,5 +1,3 @@
-//= require jquery/dist/jquery.js
-
 $(document).on('click', '.header__toggle-btn', function() {
   $('body').addClass('no-scroll')
   $('.header').addClass('header--open')

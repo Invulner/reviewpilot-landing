@@ -1,5 +1,3 @@
-//= require jquery/dist/jquery.js
-
 var emailRegexp = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 
 window.addEventListener('load', (e) => {
@@ -11,16 +9,40 @@ window.addEventListener('load', (e) => {
   var heroModalBtn = document.getElementsByClassName('hero__btn')[0]
   var heroEmailInput = document.getElementById('hero-email')
 
-  function submitForm() {
+  function turnOnLoadingMode() {
     submitBtn.classList.add('loading')
     form.classList.add('disabled')
-    var formData = new FormData(form)
+  }
 
-    setTimeout(function() {
-      modalBody.classList.add('modal-body--submitted')
-      submitBtn.classList.remove('loading')
-      form.classList.remove('disabled')
-    }, 700)
+  function turnOffLoadingMode() {
+    submitBtn.classList.remove('loading')
+    form.classList.remove('disabled')
+  }
+
+  function clearForm() {
+    form.reset()
+    modalBody.classList.remove('modal-body--submitted')
+    emailInput.classList.remove('invalid')
+  }
+
+  function submitForm() {
+    turnOnLoadingMode()
+
+    $.ajax({
+      type: 'POST',
+      url: 'https://app.reviewpilot.net/leads',
+      data: $(form).serialize(),
+      dataType: 'json',
+      success: function(data) {
+        modalBody.classList.add('modal-body--submitted')
+        turnOffLoadingMode()
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log("ERROR: " + textStatus + ", " + errorThrown)
+        console.log(jqXHR)
+        turnOffLoadingMode()
+      }
+    })
   }
 
   form.addEventListener('submit', (event) => {
@@ -44,9 +66,5 @@ window.addEventListener('load', (e) => {
     }
   })
 
-  $(modal).on('hidden.bs.modal', () => {
-    form.reset()
-    modalBody.classList.remove('modal-body--submitted')
-    emailInput.classList.remove('invalid')
-  })
+  $(modal).on('hidden.bs.modal', clearForm)
 })

@@ -9,10 +9,10 @@
           p.modal__text Заполните форму чтобы получить бесплатную демо версию
 
           form#demo-form(novalidate)
-            input.modal__input#email(type="email" name="email" placeholder="Электронная почта")
-            input.modal__input(type="phone" name="phone" placeholder="Телефон")
-            input.modal__input(type="text" name="name" placeholder="Имя")
-            textarea.modal__input(placeholder="Комментарий" cols="15" name="comment" rows="10")
+            input.modal__input#email(type="email" name="lead[email]" placeholder="Электронная почта")
+            input.modal__input(type="phone" name="lead[phone]" placeholder="Телефон")
+            input.modal__input(type="text" name="lead[name]" placeholder="Имя")
+            textarea.modal__input(placeholder="Комментарий" cols="15" name="lead[comment]" rows="10")
             button.modal__input.modal__input--submit.btn.btn--primary#demo-submit(type="submit")
               | Запросить демо
               .spinner
