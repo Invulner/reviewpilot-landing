@@ -1,0 +1,83 @@
+$card__margin: 20px
+$card__tablet-margin: 10px
+
+.cards
+  display: flex
+  flex-wrap: wrap
+  margin: -$card__margin
+
+  @media (max-width: 1024px)
+    margin: -$card__tablet-margin
+
+.card
+  margin: $card__margin
+  position: relative
+  background-color: #f9f9f9
+  padding: 123px 30px 40px
+  width: calc((100% - 3 * 2 * #{$card__margin}) / 3)
+
+  &::before
+    content: ''
+    position: absolute
+    top: 25px
+    left: 30px
+    width: 100px
+    height: 100px
+    background-repeat: no-repeat
+
+    @media (max-width: 767px)
+      left: 50%
+      transform: translateX(-50%)
+
+  @media (max-width: 1024px)
+    margin: $card__tablet-margin
+    padding: 123px 20px 30px
+    width: calc((100% - 3 * 2 * #{$card__tablet-margin}) / 3)
+
+  @media (max-width: 980px)
+    width: calc((100% - 2 * 2 * #{$card__tablet-margin}) / 2)
+
+  @media (max-width: 767px)
+    width: 100%
+    text-align: center
+
+.card--all-in-one::before
+  background-image: url('../images/icons/all-in-one.svg')
+
+  @media (max-width: 767px)
+    width: 94px
+    height: 74px
+
+.card--notification::before
+  background-image: url('../images/icons/notification.svg')
+
+  @media (max-width: 767px)
+    width: 64px
+    height: 74px
+
+.card--analysis::before
+  background-image: url('../images/icons/analysis.svg')
+
+  @media (max-width: 767px)
+    height: 80px
+
+.card--export::before
+  background-image: url('../images/icons/export.svg')
+
+  @media (max-width: 767px)
+    width: 70px
+    height: 76px
+
+.card--demo::before
+  background-image: url('../images/icons/demo.png')
+  background-size: contain
+
+  @media (max-width: 767px)
+    background-position-x: 10px
+
+.card--mobile::before
+  background-image: url('../images/icons/mobile.svg')
+
+  @media (max-width: 767px)
+    width: 90px
+    height: 80px

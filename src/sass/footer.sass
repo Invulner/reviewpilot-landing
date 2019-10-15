@@ -1,0 +1,88 @@
+$footer__link-side-padding: 22px
+$footer__link-side-tablet-padding: 18px
+$footer__link-side-mobile-padding: 14px
+
+.footer
+  background-color: #000
+  height: 126px
+  display: flex
+  align-items: center
+
+  @media (max-width: 1024px)
+    height: 80px
+
+.footer__container
+  display: flex
+  justify-content: space-between
+  width: 100%
+  align-items: center
+
+  @media (max-width: 767px)
+    justify-content: center
+
+.footer__social-list,
+.footer__lang-list
+  display: flex
+
+.footer__social-list
+  margin-left: -$footer__link-side-padding
+
+  @media (max-width: 1024px)
+    margin-left: -$footer__link-side-tablet-padding
+
+  @media (max-width: 767px)
+    margin-left: 0
+
+.footer__lang-list
+  margin-right: -$footer__link-side-padding
+
+  @media (max-width: 1024px)
+    margin-right: -$footer__link-side-tablet-padding
+
+  @media (max-width: 767px)
+    display: none
+
+.footer__social-list-link
+  display: block
+  color: #fff
+  font-size: 20px
+  padding: 10px $footer__link-side-padding
+  transition: .1s
+
+  &:hover
+    color: rgba(255, 255, 255, .75)
+
+  @media (max-width: 1024px)
+    font-size: 18px
+    padding: 10px $footer__link-side-tablet-padding
+
+  @media (max-width: 767px)
+    font-size: 16px
+    padding: 10px $footer__link-side-mobile-padding
+
+.footer__lang-list-item
+  position: relative
+
+  &:not(:last-child)::after
+    content: '/'
+    font-size: 24px
+    position: absolute
+    top: -4px
+    right: -10px
+    color: rgba(255, 255, 255, .4)
+
+.footer__lang-list-link
+  font-size: 16px
+  padding: 10px $footer__link-side-padding
+  color: rgba(255, 255, 255, .5)
+  transition: .1s
+
+  &:hover
+    color: rgba(255, 255, 255, .75)
+
+  @media (max-width: 1024px)
+    font-size: 14px
+    padding: 10px $footer__link-side-tablet-padding
+
+.footer__lang-list-link--active
+  color: #fff

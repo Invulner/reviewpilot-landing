@@ -1,0 +1,228 @@
+$header-height: 90px
+$header-mobile-height: 60px
+$header-hamburger-area-size: 60px
+$header-hamburger-width: 36px
+
+.header
+  height: $header-height
+  position: fixed
+  width: 100%
+  padding-top: 20px
+  z-index: 10
+
+  @media (max-width: 767px)
+    padding-top: 0
+    height: $header-mobile-height
+
+.header__mobile-logo,
+.header__toggle-btn
+  @media (min-width: 768px)
+    display: none
+
+.header__mobile-logo
+  position: absolute
+  top: 50%
+  left: $container-mobile-padding
+  transform: translateY(-50%)
+
+  img
+    max-width: 140px
+
+.header__toggle-btn
+  border: 0
+  background: 0
+  position: absolute
+  width: $header-hamburger-area-size
+  height: $header-hamburger-area-size
+  padding: 0
+  right: $container-mobile-padding - ($header-hamburger-area-size - $header-hamburger-width)/2
+  -webkit-appearance: none
+
+  &::after
+    content: ''
+    position: absolute
+    top: 18px
+    left: 50%
+    width: $header-hamburger-width
+    margin-left: -18px
+    height: 3px
+    background-color: #000
+    box-shadow: 0 11px 0 0 #000, 0 22px 0 0 #000
+
+  &,
+  &:focus
+    outline: none
+
+.header--fixed
+  background-color: #fff
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2)
+
+.header__nav
+  display: flex
+  justify-content: space-between
+
+  @media (max-width: 767px)
+    position: fixed
+    top: 0
+    right: 0
+    width: 260px
+    background-color: #fff
+    transform: translateX(260px)
+    height: 100vh
+    justify-content: initial
+    flex-direction: column
+    transition: transform .3s ease-in-out
+    padding: 20px
+    z-index: 5
+
+    .header--open &
+      transform: translateX(0)
+
+.header__overlay
+  position: absolute
+  left: 0
+  top: 0
+  width: 100vw
+  height: 100vh
+  background-color: rgba(0, 0, 0, .8)
+  opacity: 0
+  visibility: hidden
+  transition: .2s ease-in-out
+  z-index: -1
+  cursor: pointer
+  pointer-events: none
+
+  .header--open &
+    opacity: 1
+    visibility: visible
+    pointer-events: initial
+    z-index: 2
+
+.header__links
+  display: flex
+  padding: 0
+  align-items: center
+  cursor: pointer
+
+  @media (max-width: 767px)
+    flex-direction: column
+    align-items: initial
+
+    > li:not(:last-child)
+      border-bottom: 1px solid #ccc
+
+.header__logo
+  margin-right: 30px
+
+  @media (max-width: 1024px)
+    margin-right: 20px
+
+    img
+      max-width: 150px
+
+  @media (max-width: 767px)
+    display: none
+
+.header__link
+  font-size: 16px
+  line-height: 24px
+  margin-right: 10px
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 10px
+  transition: .1s
+  color: $dark-grey
+
+  &:hover,
+  &:focus
+    color: #000
+
+  @media (max-width: 1024px)
+    padding: 6px
+
+  @media (max-width: 767px)
+    display: block
+
+.header__link--demo
+  color: $pink
+  transition: .3s
+
+  &:hover
+    color: $dark-pink
+
+.header__lang-link
+  position: relative
+
+  @media (max-width: 1024px)
+    padding-right: 10px
+
+  @media (max-width: 767px)
+    padding-right: 0
+    font-size: 0
+
+.header__lang-link::after
+  content: ''
+  position: absolute
+  right: -7px
+  top: 50%
+  transform: translateY(-50%) rotate(0deg)
+  width: 12px
+  height: 7px
+  background: url('../images/arrow-down.svg') no-repeat
+  transition: transform .2s linear
+
+  @media (max-width: 767px)
+    display: none
+
+.header__lang-link--active::after
+  transform: translateY(-50%) rotate(180deg)
+
+.header__dropdown
+  opacity: 0
+  margin-top: -10px
+  transition: all 0.1s
+  position: absolute
+  background: #fff
+  padding: 10px 15px
+  top: 50px
+  left: -50px
+  box-shadow: 0 2px 10px rgba(53, 53, 71, 0.1)
+  transition: .2s ease-in-out
+  z-index: 10
+
+  @media (max-width: 767px)
+    opacity: 1
+    margin: 0
+    padding: 0
+    position: relative
+    box-shadow: none
+    top: 0
+    left: 0
+    font-size: 16px
+    margin-top: -20px
+    margin-left: -5px
+
+.header__dropdown--active
+  opacity: 1
+  margin-top: 0
+
+  @media (max-width: 767px)
+    margin-top: -20px
+
+.header__dropdown-link
+  padding: 5px
+  display: block
+  cursor: pointer
+  color: $heading-color
+  opacity: .5
+
+  &:hover
+    opacity: 1
+
+.header__dropdown-link--active
+  opacity: 1
+
+.header__links--right
+  @media (max-width: 767px)
+    margin-top: auto

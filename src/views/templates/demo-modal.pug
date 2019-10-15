@@ -1,0 +1,23 @@
+.modal.fade#demo-modal(tabindex="-1")
+  .modal-dialog
+    .modal-content
+      .modal-body
+        button.close(data-dismiss="modal")
+          img(src="./images/icons/close-icon.svg")
+        img.modal__logo(src="./images/logo.svg")
+        .modal-body__form
+          p.modal__text Заполните форму чтобы получить бесплатную демо версию
+
+          form#demo-form(novalidate)
+            input.modal__input#email(type="email" name="email" placeholder="Электронная почта")
+            input.modal__input(type="phone" name="phone" placeholder="Телефон")
+            input.modal__input(type="text" name="name" placeholder="Имя")
+            textarea.modal__input(placeholder="Комментарий" cols="15" name="comment" rows="10")
+            button.modal__input.modal__input--submit.btn.btn--primary#demo-submit(type="submit")
+              | Запросить демо
+              .spinner
+                .bounce1
+                .bounce2
+                .bounce3
+        .modal-body__success
+          p.modal__text Спасибо за интерес к нашему сервису. Мы свяжемся в сами в ближайшее время.

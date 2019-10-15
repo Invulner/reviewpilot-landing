@@ -1,0 +1,89 @@
+.modal-dialog
+  max-width: 600px
+
+.modal-content
+  border-radius: 0
+  text-align: center
+  border: 0
+
+  form.disabled
+    pointer-events: none
+
+.modal-body
+  padding: 70px
+
+  @media (max-width: 1024px)
+    padding: 30px
+
+.modal__text
+  line-height: 30px
+  margin-bottom: 30px
+
+  &:only-child
+    margin: 0
+
+button.close
+  position: absolute
+  top: 15px
+  right: 15px
+  background: none
+  border: none
+
+.modal__logo
+  width: 280px
+  margin-bottom: 20px
+
+.modal__input
+  width: 100%
+  border: 1px solid transparent
+
+  &:not(.modal__input--submit):focus
+    background: #fff
+    border-color: $grey
+
+  &:not(:last-child)
+    margin-bottom: 30px
+
+  &.invalid
+    border-color: red !important
+
+  &::-webkit-input-placeholder
+    opacity: .5
+    color: #606579
+
+  &:-moz-placeholder
+    opacity: .5
+    color: #606579
+
+  &::-moz-placeholder
+    opacity: .5
+    color: #606579
+
+  &:-ms-input-placeholder
+    opacity: .5
+    color: #606579
+
+  @media (max-width: 1024px)
+    &:not(:last-child)
+      margin-bottom: 20px
+
+.modal__input--submit
+  .spinner
+    display: none
+
+  &.loading
+    font-size: 0
+    position: relative
+
+    .spinner
+      display: block
+
+.modal-body__success
+  display: none
+
+.modal-body--submitted
+  .modal-body__success
+    display: block
+
+  .modal-body__form
+    display: none

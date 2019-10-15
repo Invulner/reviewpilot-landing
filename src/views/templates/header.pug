@@ -1,0 +1,33 @@
+header.header
+  a.header__mobile-logo.anchor-link(href="#home")
+    img(src="./images/logo.svg")
+
+  button.header__toggle-btn
+
+  .header__overlay
+
+  .container
+    .header__nav
+      ul.header__links.header__links--left
+        li.header__logo
+          a.anchor-link(href="#home")
+            img(src="./images/logo.svg")
+        li
+          a.header__link.anchor-link(href="#how-it-works") Как это работает
+        li
+          a.header__link.anchor-link(href="#advantages") Преимущества
+      ul.header__links.header__links--right
+        li.header__link.header__link--demo(
+          data-toggle="modal"
+          data-target="#demo-modal"
+          data-keyboard="true"
+        )
+          | Запросить демо
+        li.header__link.header__lang-link Рус
+          ul.header__dropdown
+            li
+              a.header__dropdown-link.header__dropdown-link--active(href="#") Русский
+            li
+              a.header__dropdown-link(href="#") Українська
+            li
+              a.header__dropdown-link(href="#") English

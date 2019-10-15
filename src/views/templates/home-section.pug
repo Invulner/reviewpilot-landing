@@ -1,0 +1,18 @@
+section.hero
+  .container
+    .hero__content-box
+      .hero__text-box
+        h1
+          | Все отзывы в одной платформе
+        p.text.text--large
+          | Управляйте отзывами с разных социальных сетей с одной платформы. Улучшайте свой бизнес с помощью обратной связи от клиентов.
+        .hero__form
+          input.hero__input#hero-email(type="email" placeholder="Email")
+          button.btn.btn--primary.hero__btn(
+            data-toggle="modal"
+            data-target="#demo-modal"
+            data-keyboard="true"
+          )
+            | Запросить демо
+      .rellax(data-rellax-speed="2")
+        img.hero__img(src="./images/hero.png")

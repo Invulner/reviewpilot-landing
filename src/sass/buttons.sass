@@ -1,0 +1,29 @@
+.btn
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  padding: 15px 20px
+  color: #fff
+  height: 70px
+  font-size: 24px
+  font-family: 'Gilroy', sans-serif
+  transition: .2s
+  cursor: pointer
+  outline: none
+  border: 0
+
+  @media (max-width: 1280px)
+    height: 60px
+    padding: 15px
+    font-size: 20px
+
+  @media (max-width: 1024px)
+    height: 50px
+    padding: 15px
+    font-size: 18px
+
+.btn--primary
+  background: $pink
+
+  &:hover
+    background: $dark-pink

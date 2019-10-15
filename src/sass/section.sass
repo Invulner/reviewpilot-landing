@@ -1,0 +1,66 @@
+.section
+  padding: 110px 0 120px
+  position: relative
+
+  &:not(:last-child):not(.section--no-border)::after
+    content: ''
+    position: absolute
+    bottom: 0
+    width: calc(#{$container-width} - 2 * #{$container-padding})
+    left: 50%
+    height: 1px
+    background-color: #dbe1e8
+    margin-left: calc(-1 * (#{$container-width}/2 - #{$container-padding}))
+
+    @media (max-width: 1400px)
+      width: calc(100% - 2 * #{$container-padding})
+      margin-left: calc(-1 * (100% / 2 - #{$container-padding}))
+
+    @media (max-width: 1024px)
+      width: calc(100% - 2 * #{$container-tablet-padding})
+      margin-left: calc(-1 * (100% / 2 - #{$container-tablet-padding}))
+
+    @media (max-width: 767px)
+      width: calc(100% - 2 * #{$container-mobile-padding})
+      margin-left: calc(-1 * (100% / 2 - #{$container-mobile-padding}))
+
+  @media (max-width: 1024px)
+    padding: 80px 0
+
+  @media (max-width: 767px)
+    padding: 40px 0
+
+.section--grey
+  background-color: $background-grey
+
+.section--centered
+  text-align: center
+
+.section__columns
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+
+  &:not(:last-child)
+    margin-bottom: 85px
+
+.section__column
+  width: calc(50% - 25px)
+
+  @media (max-width: 767px)
+    width: calc(100% - 15px)
+
+    &:not(:last-child)
+      margin-bottom: 40px
+
+.section--extra-height
+  padding: 150px 0
+
+  @media (max-width: 1024px)
+    padding: 120px 0
+
+  @media (max-width: 767px)
+    padding: 80px 0
+
+.section__block
+  margin-bottom: 50px
