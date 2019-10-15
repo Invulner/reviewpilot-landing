@@ -30,7 +30,7 @@ window.addEventListener('load', (e) => {
 
     $.ajax({
       type: 'POST',
-      url: 'https://app.reviewpilot.net/leads',
+      url: 'https://app.reviewpilot.net/leads.js',
       data: $(form).serialize(),
       dataType: 'json',
       success: function(data) {
