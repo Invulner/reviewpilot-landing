@@ -51,7 +51,7 @@ var assetsFiles = {
 var zipFiles = {
   src: paths.dist + '/**/*.*',
   dist: './zip/',
-  name: 'ov-theme.zip'
+  name: 'reviewpilot-landing.zip'
 }
 
 // Compiles pug
