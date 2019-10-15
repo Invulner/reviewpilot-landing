@@ -32,7 +32,6 @@ window.addEventListener('load', (e) => {
       type: 'POST',
       url: 'https://app.reviewpilot.net/leads.js',
       data: $(form).serialize(),
-      dataType: 'json',
       success: function(data) {
         modalBody.classList.add('modal-body--submitted')
         turnOffLoadingMode()
