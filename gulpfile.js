@@ -10,11 +10,9 @@ var zip         = require('gulp-zip');
 var rev         = require('gulp-rev');
 var revReplace  = require('gulp-rev-replace');
 var del         = require('del');
-var browserSync = require('browser-sync');
-var spa         = require('browser-sync-spa');
+var gulpIf      = require('gulp-if')
+var browserSync = require('browser-sync').create();
 var include     = require('gulp-include');
-
-browserSync.use(spa());
 
 var paths = {
   src: 'src',
@@ -56,6 +54,8 @@ var zipFiles = {
 }
 
 var manifestFile = 'manifest.json'
+var args = require('yargs').argv
+var isDevelopment = args._[0] != 'build'
 
 // Compiles pug
 gulp.task('pug', function() {
@@ -64,9 +64,9 @@ gulp.task('pug', function() {
       locals: {},
       pretty: true
     }))
-    .pipe(revReplace({
+    .pipe(gulpIf(!isDevelopment, revReplace({
       manifest: gulp.src(manifestFile, {allowEmpty: true})
-    }))
+    })))
     .pipe(gulp.dest(pugFiles.dist));
 });
 
@@ -74,14 +74,14 @@ gulp.task('pug', function() {
 gulp.task('sass', function() {
   return gulp.src(scssFiles.src)
     .pipe(sass().on('error', sass.logError))
-    .pipe(rev())
+    .pipe(gulpIf(!isDevelopment, rev()))
     .pipe(gulp.dest(scssFiles.dist))
-    .pipe(rev.manifest(manifestFile, {
+    .pipe(gulpIf(!isDevelopment, rev.manifest(manifestFile, {
       base: 'manifest',
       merge: true
-    }))
+    })))
     .pipe(browserSync.stream())
-    .pipe(gulp.dest('manifest'));
+    .pipe(gulpIf(!isDevelopment, gulp.dest('manifest')));
 });
 
 // Compiles Vanilla JS
@@ -92,16 +92,16 @@ gulp.task('js', () => {
         __dirname + "/node_modules"
       ]
     }))
-    .pipe(rev())
+    .pipe(gulpIf(!isDevelopment, rev()))
     .pipe(gulp.dest(jsFiles.dist))
-    .pipe(rev.manifest(manifestFile, {
+    .pipe(gulpIf(!isDevelopment, rev.manifest(manifestFile, {
       base: 'manifest',
       merge: true
-    }))
+    })))
     .pipe(browserSync.reload({
       stream: true
     }))
-    .pipe(gulp.dest('manifest'));
+    .pipe(gulpIf(!isDevelopment, gulp.dest('manifest')));
 });
 
 // Compiles ES6 JS
@@ -112,28 +112,15 @@ gulp.task('js:babel', () => {
         __dirname + "/node_modules"
       ]
     }))
-    .pipe(rev())
+    .pipe(gulpIf(!isDevelopment, rev()))
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(jsFiles.dist))
-    .pipe(rev.manifest(manifestFile, {
+    .pipe(gulpIf(!isDevelopment, rev.manifest(manifestFile, {
       base: 'manifest',
       merge: true
-    }))
-    .pipe(gulp.dest('manifest'));
+    })))
+    .pipe(gulpIf(!isDevelopment, gulp.dest('manifest')));
 });
-
-// Inits Browser Sync server
-function browserSyncServe(done) {
-  browserSync.init({
-    ghostMode: true,
-    notify: false,
-    server: {
-      baseDir: paths.dist
-    },
-    open: 'local'
-  });
-  done();
-}
 
 // Simple timeout to deal with Pug compiling lag
 function reloadBrowserSyncPug() {
@@ -148,13 +135,13 @@ function reloadBrowserSync() {
 // Move all assets task
 gulp.task('move', () => {
   return gulp.src(assetsFiles.src)
-    .pipe(rev())
+    .pipe(gulpIf(!isDevelopment, rev()))
     .pipe(gulp.dest(assetsFiles.dist))
-    .pipe(rev.manifest(manifestFile, {
+    .pipe(gulpIf(!isDevelopment, rev.manifest(manifestFile, {
       base: 'manifest',
       merge: true
-    }))
-    .pipe(gulp.dest('manifest'))
+    })))
+    .pipe(gulpIf(!isDevelopment, gulp.dest('manifest')))
 });
 
 // Move assets task
@@ -169,7 +156,12 @@ gulp.task('watch', function() {
 });
 
 // Browsersync Task
-gulp.task('browsersync', gulp.series(browserSyncServe));
+gulp.task('browsersync', function() {
+  browserSync.init({
+    server: paths.dist,
+    port: 8001
+  })
+});
 
 // [npm run build] Default Task
 gulp.task('default', gulp.series('sass', 'js', 'move', 'pug'));
@@ -178,7 +170,7 @@ gulp.task('default', gulp.series('sass', 'js', 'move', 'pug'));
 gulp.task('build', gulp.series('default'));
 
 // [npm run serve] Serve Task
-gulp.task('serve', gulp.series('default', 'watch', 'browsersync'));
+gulp.task('serve', gulp.series('default', gulp.parallel('watch', 'browsersync')));
 
 // Zip dist task
 gulp.task('zip', () => {
