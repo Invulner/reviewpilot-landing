@@ -8,6 +8,7 @@ var babel       = require('gulp-babel');
 var livereload  = require('gulp-livereload');
 var zip         = require('gulp-zip');
 var rev         = require('gulp-rev');
+var revReplace  = require('gulp-rev-replace');
 var del         = require('del');
 var browserSync = require('browser-sync');
 var spa         = require('browser-sync-spa');
@@ -54,6 +55,8 @@ var zipFiles = {
   name: 'reviewpilot-landing.zip'
 }
 
+var manifestFile = 'manifest.json'
+
 // Compiles pug
 gulp.task('pug', function() {
   return gulp.src(pugFiles.src)
@@ -61,15 +64,24 @@ gulp.task('pug', function() {
       locals: {},
       pretty: true
     }))
-    .pipe(gulp.dest(pugFiles.dist))
+    .pipe(revReplace({
+      manifest: gulp.src(manifestFile, {allowEmpty: true})
+    }))
+    .pipe(gulp.dest(pugFiles.dist));
 });
 
 // Compiles SCSS
 gulp.task('sass', function() {
   return gulp.src(scssFiles.src)
     .pipe(sass().on('error', sass.logError))
+    .pipe(rev())
     .pipe(gulp.dest(scssFiles.dist))
-    .pipe(browserSync.stream());
+    .pipe(rev.manifest(manifestFile, {
+      base: 'manifest',
+      merge: true
+    }))
+    .pipe(browserSync.stream())
+    .pipe(gulp.dest('manifest'));
 });
 
 // Compiles Vanilla JS
@@ -80,10 +92,16 @@ gulp.task('js', () => {
         __dirname + "/node_modules"
       ]
     }))
+    .pipe(rev())
     .pipe(gulp.dest(jsFiles.dist))
+    .pipe(rev.manifest(manifestFile, {
+      base: 'manifest',
+      merge: true
+    }))
     .pipe(browserSync.reload({
       stream: true
-    }));
+    }))
+    .pipe(gulp.dest('manifest'));
 });
 
 // Compiles ES6 JS
@@ -94,8 +112,14 @@ gulp.task('js:babel', () => {
         __dirname + "/node_modules"
       ]
     }))
+    .pipe(rev())
     .pipe(babel({ presets: ['es2015'] }))
-    .pipe(gulp.dest(jsFiles.dist));
+    .pipe(gulp.dest(jsFiles.dist))
+    .pipe(rev.manifest(manifestFile, {
+      base: 'manifest',
+      merge: true
+    }))
+    .pipe(gulp.dest('manifest'));
 });
 
 // Inits Browser Sync server
@@ -124,7 +148,13 @@ function reloadBrowserSync() {
 // Move all assets task
 gulp.task('move', () => {
   return gulp.src(assetsFiles.src)
-    .pipe(gulp.dest(assetsFiles.dist));
+    .pipe(rev())
+    .pipe(gulp.dest(assetsFiles.dist))
+    .pipe(rev.manifest(manifestFile, {
+      base: 'manifest',
+      merge: true
+    }))
+    .pipe(gulp.dest('manifest'))
 });
 
 // Move assets task
@@ -142,7 +172,7 @@ gulp.task('watch', function() {
 gulp.task('browsersync', gulp.series(browserSyncServe));
 
 // [npm run build] Default Task
-gulp.task('default', gulp.series('pug', 'sass', 'js', 'move'));
+gulp.task('default', gulp.series('sass', 'js', 'move', 'pug'));
 
 // [npm run build] Build Task
 gulp.task('build', gulp.series('default'));
