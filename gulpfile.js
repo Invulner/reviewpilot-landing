@@ -74,6 +74,9 @@ gulp.task('pug', function() {
 gulp.task('sass', function() {
   return gulp.src(scssFiles.src)
     .pipe(sass().on('error', sass.logError))
+    .pipe(gulpIf(!isDevelopment, revReplace({
+      manifest: gulp.src(manifestFile, {allowEmpty: true})
+    })))
     .pipe(gulpIf(!isDevelopment, rev()))
     .pipe(gulp.dest(scssFiles.dist))
     .pipe(gulpIf(!isDevelopment, rev.manifest(manifestFile, {
