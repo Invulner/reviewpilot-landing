@@ -15,12 +15,19 @@
   @media (max-width: 1024px)
     padding: 30px
 
+  @media (max-width: 480px)
+    padding: 20px
+
 .modal__text
   line-height: 30px
   margin-bottom: 30px
 
   &:only-child
     margin: 0
+
+  @media (max-width: 480px)
+    line-height: 24px
+    margin-bottom: 20px
 
 button.close
   position: absolute
@@ -32,6 +39,10 @@ button.close
 .modal__logo
   width: 280px
   margin-bottom: 20px
+
+  @media (max-width: 480px)
+    width: 230px
+    margin-bottom: 15px
 
 .modal__input
   width: 100%
@@ -66,6 +77,10 @@ button.close
   @media (max-width: 1024px)
     &:not(:last-child)
       margin-bottom: 20px
+
+  @media (max-width: 480px)
+    :not(:last-child)
+      margin-bottom: 15px
 
 .modal__input--submit
   .spinner
