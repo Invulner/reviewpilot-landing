@@ -3,7 +3,7 @@
 var gulp        = require('gulp');
 var gutil       = require('gulp-util');
 var sass        = require('gulp-sass');
-var pug         = require('gulp-pug');
+var pug         = require('gulp-pug-i18n');
 var babel       = require('gulp-babel');
 var livereload  = require('gulp-livereload');
 var zip         = require('gulp-zip');
@@ -58,10 +58,43 @@ var args = require('yargs').argv
 var isDevelopment = args._[0] != 'build'
 
 // Compiles pug
-gulp.task('pug', function() {
+gulp.task('pugRu', function() {
   return gulp.src(pugFiles.src)
     .pipe(pug({
-      locals: {},
+      i18n: {
+        locales: 'src/locales/ru.yml',
+        filename: 'index.ru.html'
+      },
+      pretty: true
+    }))
+    .pipe(gulpIf(!isDevelopment, revReplace({
+      manifest: gulp.src(manifestFile, {allowEmpty: true})
+    })))
+    .pipe(gulp.dest(pugFiles.dist));
+});
+
+gulp.task('pugEn', function() {
+  return gulp.src(pugFiles.src)
+    .pipe(pug({
+      i18n: {
+        locales: 'src/locales/en.yml',
+        filename: 'index.en.html'
+      },
+      pretty: true
+    }))
+    .pipe(gulpIf(!isDevelopment, revReplace({
+      manifest: gulp.src(manifestFile, {allowEmpty: true})
+    })))
+    .pipe(gulp.dest(pugFiles.dist));
+});
+
+gulp.task('pugUa', function() {
+  return gulp.src(pugFiles.src)
+    .pipe(pug({
+      i18n: {
+        locales: 'src/locales/ua.yml',
+        filename: 'index.ua.html'
+      },
       pretty: true
     }))
     .pipe(gulpIf(!isDevelopment, revReplace({
@@ -167,7 +200,7 @@ gulp.task('browsersync', function() {
 });
 
 // [npm run build] Default Task
-gulp.task('default', gulp.series('sass', 'js', 'move', 'pug'));
+gulp.task('default', gulp.series('sass', 'js', 'move', 'pugRu', 'pugEn', 'pugUa'));
 
 // [npm run build] Build Task
 gulp.task('build', gulp.series('default'));
