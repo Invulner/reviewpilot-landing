@@ -3,7 +3,8 @@
 var gulp        = require('gulp');
 var gutil       = require('gulp-util');
 var sass        = require('gulp-sass');
-var pug         = require('gulp-i18n-pug');
+var pug_i18n    = require('gulp-i18n-pug');
+var pug         = require('gulp-pug');
 var babel       = require('gulp-babel');
 var livereload  = require('gulp-livereload');
 var zip         = require('gulp-zip');
@@ -57,12 +58,25 @@ var manifestFile = 'manifest.json'
 var args = require('yargs').argv
 var isDevelopment = args._[0] != 'build'
 
-// Compiles pug
+// Compiles pug for watcher
 gulp.task('pug', function() {
-  return gulp.src('src/views/index.pug')
+  return gulp.src(pugFiles.src)
     .pipe(pug({
+      locals: {},
+      pretty: true
+    }))
+    .pipe(gulpIf(!isDevelopment, revReplace({
+      manifest: gulp.src(manifestFile, {allowEmpty: true})
+    })))
+    .pipe(gulp.dest(pugFiles.dist));
+});
+
+//Compiles pug with locales
+gulp.task('pugRu', function() {
+  return gulp.src('src/views/index.pug')
+    .pipe(pug_i18n({
       i18n: {
-        locales: 'src/locales/*.yml',
+        locales: 'src/locales/ru.yml',
         namespace: '$t',
         localeExtension: true,
         dest: pugFiles.dist
@@ -77,7 +91,7 @@ gulp.task('pug', function() {
 
 gulp.task('pugEn', function() {
   return gulp.src('src/views/index.pug')
-    .pipe(pug({
+    .pipe(pug_i18n({
       i18n: {
         locales: 'src/locales/en.yml',
         namespace: '$t',
@@ -94,24 +108,7 @@ gulp.task('pugEn', function() {
 
 gulp.task('pugUa', function() {
   return gulp.src('src/views/index.pug')
-    .pipe(pug({
-      i18n: {
-        locales: 'src/locales/ua.yml',
-        namespace: '$t',
-        localeExtension: true,
-        dest: pugFiles.dist
-      },
-      pretty: true
-    }))
-    .pipe(gulpIf(!isDevelopment, revReplace({
-      manifest: gulp.src(manifestFile, {allowEmpty: true})
-    })))
-    .pipe(gulp.dest(pugFiles.dist));
-});
-
-gulp.task('pugWatch', function() {
-  return gulp.src(pugFiles.src)
-    .pipe(pug({
+    .pipe(pug_i18n({
       i18n: {
         locales: 'src/locales/ua.yml',
         namespace: '$t',
@@ -208,7 +205,7 @@ gulp.task('moveassets', gulp.series('move'));
 
 // Watch Task
 gulp.task('watch', function() {
-  gulp.watch(pugFiles.watch, gulp.series('pug', reloadBrowserSyncPug));
+  gulp.watch(pugFiles.watch, gulp.series('pugRu', reloadBrowserSyncPug));
   gulp.watch(scssFiles.watch, gulp.series('sass'));
   gulp.watch(jsFiles.watch, gulp.series('js'));
   gulp.watch(assetsFiles.watch, gulp.series('moveassets', reloadBrowserSyncPug));
@@ -217,16 +214,22 @@ gulp.task('watch', function() {
 // Browsersync Task
 gulp.task('browsersync', function() {
   browserSync.init({
-    server: paths.dist,
+    server: {
+      baseDir: paths.dist,
+      index: 'index.ru.html'
+    },
     port: 8001
   })
 });
 
+// Compile all html with localization (not used for now)
+gulp.task('pugi18n', gulp.series('pugRu', 'pugEn', 'pugUa'))
+
 // [npm run build] Default Task
-gulp.task('default', gulp.series('sass', 'js', 'move', 'pug'));
+gulp.task('default', gulp.series('sass', 'js', 'move', 'pugRu'));
 
 // [npm run build] Build Task
-gulp.task('build', gulp.series('default'));
+gulp.task('build', gulp.series('sass', 'js', 'move', 'pugRu'));
 
 // [npm run serve] Serve Task
 gulp.task('serve', gulp.series('default', gulp.parallel('watch', 'browsersync')));
