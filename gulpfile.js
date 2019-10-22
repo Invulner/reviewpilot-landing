@@ -3,7 +3,7 @@
 var gulp        = require('gulp');
 var gutil       = require('gulp-util');
 var sass        = require('gulp-sass');
-var pug         = require('gulp-pug-i18n');
+var pug         = require('gulp-i18n-pug');
 var babel       = require('gulp-babel');
 var livereload  = require('gulp-livereload');
 var zip         = require('gulp-zip');
@@ -63,7 +63,9 @@ gulp.task('pugRu', function() {
     .pipe(pug({
       i18n: {
         locales: 'src/locales/ru.yml',
-        filename: 'index.ru.html'
+        namespace: '$t',
+        localeExtension: true,
+        dest: pugFiles.dist
       },
       pretty: true
     }))
@@ -78,7 +80,9 @@ gulp.task('pugEn', function() {
     .pipe(pug({
       i18n: {
         locales: 'src/locales/en.yml',
-        filename: 'index.en.html'
+        namespace: '$t',
+        localeExtension: true
+        // filename: 'index.en.html'
       },
       pretty: true
     }))
@@ -93,7 +97,9 @@ gulp.task('pugUa', function() {
     .pipe(pug({
       i18n: {
         locales: 'src/locales/ua.yml',
-        filename: 'index.ua.html'
+        namespace: '$t',
+        localeExtension: true
+        // filename: 'index.ua.html'
       },
       pretty: true
     }))
@@ -200,7 +206,7 @@ gulp.task('browsersync', function() {
 });
 
 // [npm run build] Default Task
-gulp.task('default', gulp.series('sass', 'js', 'move', 'pugRu', 'pugEn', 'pugUa'));
+gulp.task('default', gulp.series('sass', 'js', 'move', 'pugRu'));
 
 // [npm run build] Build Task
 gulp.task('build', gulp.series('default'));
