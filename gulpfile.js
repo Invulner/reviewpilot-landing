@@ -54,6 +54,50 @@ var zipFiles = {
   name: 'reviewpilot-landing.zip'
 }
 
+var localesArr = [
+  {
+    task: 'pugRu',
+    config: {
+      locales: 'src/locales/ru.yml',
+      namespace: '$t',
+      localeExtension: true,
+      dest: pugFiles.dist
+    }
+  },
+  {
+    task: 'pugEn',
+    config: {
+      locales: 'src/locales/en.yml',
+      namespace: '$t',
+      localeExtension: true,
+      dest: pugFiles.dist
+    }
+  },
+  {
+    task: 'pugUa',
+    config: {
+      locales: 'src/locales/ua.yml',
+      namespace: '$t',
+      localeExtension: true,
+      dest: pugFiles.dist
+    }
+  }
+]
+
+localesArr.map(locale => {
+  return gulp.task(localesArr.task, function() {
+    return gulp.src('src/views/index.pug')
+      .pipe(pug_i18n({
+        i18n: locale.config,
+        pretty: true
+      }))
+      .pipe(gulpIf(!isDevelopment, revReplace({
+        manifest: gulp.src(manifestFile, {allowEmpty: true})
+      })))
+      .pipe(gulp.dest(pugFiles.dist));
+    });
+});
+
 var manifestFile = 'manifest.json'
 var args = require('yargs').argv
 var isDevelopment = args._[0] != 'build'
@@ -72,56 +116,56 @@ gulp.task('pug', function() {
 });
 
 //Compiles pug with locales
-gulp.task('pugRu', function() {
-  return gulp.src('src/views/index.pug')
-    .pipe(pug_i18n({
-      i18n: {
-        locales: 'src/locales/ru.yml',
-        namespace: '$t',
-        localeExtension: true,
-        dest: pugFiles.dist
-      },
-      pretty: true
-    }))
-    .pipe(gulpIf(!isDevelopment, revReplace({
-      manifest: gulp.src(manifestFile, {allowEmpty: true})
-    })))
-    .pipe(gulp.dest(pugFiles.dist));
-});
+// gulp.task('pugRu', function() {
+//   return gulp.src('src/views/index.pug')
+//     .pipe(pug_i18n({
+//       i18n: {
+//         locales: 'src/locales/ru.yml',
+//         namespace: '$t',
+//         localeExtension: true,
+//         dest: pugFiles.dist
+//       },
+//       pretty: true
+//     }))
+//     .pipe(gulpIf(!isDevelopment, revReplace({
+//       manifest: gulp.src(manifestFile, {allowEmpty: true})
+//     })))
+//     .pipe(gulp.dest(pugFiles.dist));
+// });
 
-gulp.task('pugEn', function() {
-  return gulp.src('src/views/index.pug')
-    .pipe(pug_i18n({
-      i18n: {
-        locales: 'src/locales/en.yml',
-        namespace: '$t',
-        localeExtension: true,
-        dest: pugFiles.dist
-      },
-      pretty: true
-    }))
-    .pipe(gulpIf(!isDevelopment, revReplace({
-      manifest: gulp.src(manifestFile, {allowEmpty: true})
-    })))
-    .pipe(gulp.dest(pugFiles.dist));
-});
+// gulp.task('pugEn', function() {
+//   return gulp.src('src/views/index.pug')
+//     .pipe(pug_i18n({
+//       i18n: {
+//         locales: 'src/locales/en.yml',
+//         namespace: '$t',
+//         localeExtension: true,
+//         dest: pugFiles.dist
+//       },
+//       pretty: true
+//     }))
+//     .pipe(gulpIf(!isDevelopment, revReplace({
+//       manifest: gulp.src(manifestFile, {allowEmpty: true})
+//     })))
+//     .pipe(gulp.dest(pugFiles.dist));
+// });
 
-gulp.task('pugUa', function() {
-  return gulp.src('src/views/index.pug')
-    .pipe(pug_i18n({
-      i18n: {
-        locales: 'src/locales/ua.yml',
-        namespace: '$t',
-        localeExtension: true,
-        dest: pugFiles.dist
-      },
-      pretty: true
-    }))
-    .pipe(gulpIf(!isDevelopment, revReplace({
-      manifest: gulp.src(manifestFile, {allowEmpty: true})
-    })))
-    .pipe(gulp.dest(pugFiles.dist));
-});
+// gulp.task('pugUa', function() {
+//   return gulp.src('src/views/index.pug')
+//     .pipe(pug_i18n({
+//       i18n: {
+//         locales: 'src/locales/ua.yml',
+//         namespace: '$t',
+//         localeExtension: true,
+//         dest: pugFiles.dist
+//       },
+//       pretty: true
+//     }))
+//     .pipe(gulpIf(!isDevelopment, revReplace({
+//       manifest: gulp.src(manifestFile, {allowEmpty: true})
+//     })))
+//     .pipe(gulp.dest(pugFiles.dist));
+// });
 
 // Compiles SCSS
 gulp.task('sass', function() {
@@ -226,10 +270,10 @@ gulp.task('browsersync', function() {
 gulp.task('pugi18n', gulp.series('pugRu', 'pugEn', 'pugUa'))
 
 // [npm run build] Default Task
-gulp.task('default', gulp.series('sass', 'js', 'move', 'pugRu'));
+gulp.task('default', gulp.series('sass', 'js', 'move', 'pugi18n'));
 
 // [npm run build] Build Task
-gulp.task('build', gulp.series('sass', 'js', 'move', 'pugRu'));
+gulp.task('build', gulp.series('sass', 'js', 'move', 'pugi18n'));
 
 // [npm run serve] Serve Task
 gulp.task('serve', gulp.series('default', gulp.parallel('watch', 'browsersync')));
