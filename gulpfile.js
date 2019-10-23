@@ -4,7 +4,6 @@ var gulp        = require('gulp');
 var gutil       = require('gulp-util');
 var sass        = require('gulp-sass');
 var pug_i18n    = require('gulp-i18n-pug');
-var pug         = require('gulp-pug');
 var babel       = require('gulp-babel');
 var livereload  = require('gulp-livereload');
 var zip         = require('gulp-zip');
@@ -93,19 +92,6 @@ var manifestFile = 'manifest.json'
 var args = require('yargs').argv
 var isDevelopment = args._[0] != 'build'
 
-// Compiles pug for watcher
-gulp.task('pug', function() {
-  return gulp.src(pugFiles.src)
-    .pipe(pug({
-      locals: {},
-      pretty: true
-    }))
-    .pipe(gulpIf(!isDevelopment, revReplace({
-      manifest: gulp.src(manifestFile, {allowEmpty: true})
-    })))
-    .pipe(gulp.dest(pugFiles.dist));
-});
-
 // Compiles SCSS
 gulp.task('sass', function() {
   return gulp.src(scssFiles.src)
@@ -188,7 +174,10 @@ gulp.task('moveassets', gulp.series('move'));
 
 // Watch Task
 gulp.task('watch', function() {
-  gulp.watch(pugFiles.watch, gulp.series('pugRu', reloadBrowserSyncPug));
+  gulp.watch(pugFiles.watch, gulp.series('pugi18n', function(done) {
+    browserSync.reload()
+    done()
+  }));
   gulp.watch(scssFiles.watch, gulp.series('sass'));
   gulp.watch(jsFiles.watch, gulp.series('js'));
   gulp.watch(assetsFiles.watch, gulp.series('moveassets', reloadBrowserSyncPug));
