@@ -6,7 +6,7 @@
           img(src="./images/icons/close-icon.svg")
         img.modal__logo(src="./images/logo.svg")
         .modal-body__form
-          p.modal__text Заполните форму, чтобы получить бесплатный доступ
+          p.modal__text #{$t.text.fill_the_form}
 
           form#demo-form(novalidate)
             input.modal__input#email(type="email" name="lead[email]" placeholder="Электронная почта")
@@ -14,10 +14,10 @@
             input.modal__input(type="text" name="lead[name]" placeholder="Имя")
             textarea.modal__input(placeholder="Комментарий" cols="15" name="lead[comment]" rows="10")
             button.modal__input.modal__input--submit.btn.btn--primary#demo-submit(type="submit")
-              | Запросить демо
+              | #{$t.buttons.get_demo}
               .spinner
                 .bounce1
                 .bounce2
                 .bounce3
         .modal-body__success
-          p.modal__text Спасибо за интерес к нашему сервису. Мы свяжемся в сами в ближайшее время.
+          p.modal__text #{$t.text.we_will_get_in_touch}

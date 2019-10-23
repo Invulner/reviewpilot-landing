@@ -13,16 +13,16 @@ header.header
           a.anchor-link(href="#home")
             img(src="./images/logo.svg")
         li
-          a.header__link.anchor-link(href="#how-it-works") Как это работает
+          a.header__link.anchor-link(href="#how-it-works") #{$t.links.how_it_works}
         li
-          a.header__link.anchor-link(href="#advantages") Преимущества
+          a.header__link.anchor-link(href="#advantages") #{$t.links.advantages}
       ul.header__links.header__links--right
         li.header__link.header__link--demo(
           data-toggle="modal"
           data-target="#demo-modal"
           data-keyboard="true"
         )
-          | Запросить демо
+          | #{$t.links.get_demo}
         li.header__link.header__lang-link.hidden Рус
           ul.header__dropdown
             li

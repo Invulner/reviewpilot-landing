@@ -3,7 +3,7 @@
 var gulp        = require('gulp');
 var gutil       = require('gulp-util');
 var sass        = require('gulp-sass');
-var pug         = require('gulp-pug');
+var pug_i18n    = require('gulp-i18n-pug');
 var babel       = require('gulp-babel');
 var livereload  = require('gulp-livereload');
 var zip         = require('gulp-zip');
@@ -53,22 +53,44 @@ var zipFiles = {
   name: 'reviewpilot-landing.zip'
 }
 
+var locales = [
+  {
+    taskName: 'pugRu',
+    src: 'src/locales/ru.yml',
+  },
+  {
+    taskName: 'pugEn',
+    src: 'src/locales/en.yml'
+  },
+  {
+    taskName: 'pugUa',
+    src: 'src/locales/ua.yml'
+  }
+]
+
+//Compiles pug with locales
+locales.map(locale => {
+  return gulp.task(locale.taskName, function() {
+    return gulp.src('src/views/index.pug')
+      .pipe(pug_i18n({
+        i18n: {
+          locales: locale.src,
+          namespace: '$t',
+          localeExtension: true,
+          dest: pugFiles.dist
+        },
+        pretty: true
+      }))
+      .pipe(gulpIf(!isDevelopment, revReplace({
+        manifest: gulp.src(manifestFile, {allowEmpty: true})
+      })))
+      .pipe(gulp.dest(pugFiles.dist));
+    });
+});
+
 var manifestFile = 'manifest.json'
 var args = require('yargs').argv
 var isDevelopment = args._[0] != 'build'
-
-// Compiles pug
-gulp.task('pug', function() {
-  return gulp.src(pugFiles.src)
-    .pipe(pug({
-      locals: {},
-      pretty: true
-    }))
-    .pipe(gulpIf(!isDevelopment, revReplace({
-      manifest: gulp.src(manifestFile, {allowEmpty: true})
-    })))
-    .pipe(gulp.dest(pugFiles.dist));
-});
 
 // Compiles SCSS
 gulp.task('sass', function() {
@@ -152,7 +174,10 @@ gulp.task('moveassets', gulp.series('move'));
 
 // Watch Task
 gulp.task('watch', function() {
-  gulp.watch(pugFiles.watch, gulp.series('pug', reloadBrowserSyncPug));
+  gulp.watch(pugFiles.watch, gulp.series('pugi18n', function(done) {
+    browserSync.reload()
+    done()
+  }));
   gulp.watch(scssFiles.watch, gulp.series('sass'));
   gulp.watch(jsFiles.watch, gulp.series('js'));
   gulp.watch(assetsFiles.watch, gulp.series('moveassets', reloadBrowserSyncPug));
@@ -161,16 +186,22 @@ gulp.task('watch', function() {
 // Browsersync Task
 gulp.task('browsersync', function() {
   browserSync.init({
-    server: paths.dist,
+    server: {
+      baseDir: paths.dist,
+      index: 'index.ru.html'
+    },
     port: 8001
   })
 });
 
+// Compile all html with localization
+gulp.task('pugi18n', gulp.series('pugRu', 'pugEn', 'pugUa'))
+
 // [npm run build] Default Task
-gulp.task('default', gulp.series('sass', 'js', 'move', 'pug'));
+gulp.task('default', gulp.series('sass', 'js', 'move', 'pugi18n'));
 
 // [npm run build] Build Task
-gulp.task('build', gulp.series('default'));
+gulp.task('build', gulp.series('sass', 'js', 'move', 'pugi18n'));
 
 // [npm run serve] Serve Task
 gulp.task('serve', gulp.series('default', gulp.parallel('watch', 'browsersync')));
