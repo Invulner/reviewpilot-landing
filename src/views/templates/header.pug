@@ -23,11 +23,11 @@ header.header
           data-keyboard="true"
         )
           | #{$t.links.get_demo}
-        li.header__link.header__lang-link.hidden Рус
+        li.header__link.header__lang-link Рус
           ul.header__dropdown
             li
-              a.header__dropdown-link.header__dropdown-link--active(href="#") Русский
+              a.header__dropdown-link(href="/ru") Русский
             li
-              a.header__dropdown-link(href="#") Українська
+              a.header__dropdown-link(href="/ua") Українська
             li
-              a.header__dropdown-link(href="#") English
+              a.header__dropdown-link.hidden(href="/en") English

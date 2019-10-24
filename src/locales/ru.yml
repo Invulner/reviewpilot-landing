@@ -19,6 +19,9 @@ links:
   advantages: Преимущества
   get_demo: Запросить демо
 placeholders:
+  phone: Телефон
+  name: Имя
+  comment: Комментарий
   email: Электронная почта
 text:
   hero_text1: Управляйте отзывами из разных социальных сетей в одной платформе

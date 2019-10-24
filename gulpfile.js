@@ -188,7 +188,7 @@ gulp.task('browsersync', function() {
   browserSync.init({
     server: {
       baseDir: paths.dist,
-      index: 'index.ru.html'
+      index: 'index.ua.html'
     },
     port: 8001
   })
