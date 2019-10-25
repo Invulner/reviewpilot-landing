@@ -15,15 +15,30 @@ window.addEventListener('scroll', toggleHeader)
 
 window.addEventListener('load', (e) => {
   const dropdownBtn = document.querySelector('.header__lang-link')
+  const dropdown = document.querySelector('.header__dropdown')
+  const body = document.querySelector('body')
+
+  const toggleDropdown = () => {
+    dropdownBtn.classList.toggle('header__lang-link--active')
+    dropdown.classList.toggle('header__dropdown--active')
+  }
 
   toggleHeader()
 
-  dropdownBtn.addEventListener('click', (e) => {
-    const dropdown = document.querySelector('.header__dropdown')
-    e.preventDefault()
+  body.addEventListener('click', (e) => {
+    const targetElement = e.target
+    const isClickOutside = !dropdownBtn.contains(targetElement)
+    const isDropdownOpen = dropdown.classList.contains('header__dropdown--active')
 
-    dropdownBtn.classList.toggle('header__lang-link--active')
-    dropdown.classList.toggle('header__dropdown--active')
+    if(isClickOutside && isDropdownOpen) {
+      toggleDropdown()
+    }
+  })
+
+  dropdownBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    toggleDropdown()
   })
 
   document.querySelectorAll('.anchor-link').forEach(anchor => {
@@ -34,7 +49,7 @@ window.addEventListener('load', (e) => {
   })
 
   //Detect active language
-  var languages = [
+  const languages = [
     {
       key: 'en',
       val: 'En'
@@ -44,11 +59,11 @@ window.addEventListener('load', (e) => {
       val: 'Укр'
     }
   ]
-  var defaultLanguage = {
+  const defaultLanguage = {
     key: 'ru',
     val: 'Рус'
   }
-  var currentLang = languages.find(lang => window.location.href.includes(lang.key)) || defaultLanguage
+  const currentLang = languages.find(lang => window.location.href.includes(lang.key)) || defaultLanguage
 
   document.querySelectorAll('.footer__lang-list-link').forEach(link => {
     if (link.href.includes(currentLang.key)) {
