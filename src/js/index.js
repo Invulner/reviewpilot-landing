@@ -34,30 +34,30 @@ window.addEventListener('load', (e) => {
   })
 
   //Detect active language
-  const languages = [
+  var languages = [
     {
       key: 'en',
       val: 'En'
-    },
-    {
-      key: 'ru',
-      val: 'Рус'
     },
     {
       key: 'ua',
       val: 'Укр'
     }
   ]
-  const currentLang = languages.find(lang => window.location.href.includes(lang.key)).key
+  var defaultLanguage = {
+    key: 'ru',
+    val: 'Рус'
+  }
+  var currentLang = languages.find(lang => window.location.href.includes(lang.key)) || defaultLanguage
 
   document.querySelectorAll('.footer__lang-list-link').forEach(link => {
-    if (link.href.includes(currentLang)) {
+    if (link.href.includes(currentLang.key)) {
       link.classList.add('footer__lang-list-link--active')
     }
   })
 
   document.querySelectorAll('.header__dropdown-link').forEach(link => {
-    if (link.href.includes(currentLang)) {
+    if (link.href.includes(currentLang.key)) {
       link.classList.add('header__dropdown-link--active')
       dropdownBtn.childNodes[0].nodeValue = currentLang.val
     }
