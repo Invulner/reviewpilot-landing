@@ -1,0 +1,40 @@
+section#plans.section
+  .container
+    h5 #{$t.titles.plans}
+    h2.short-heading #{$t.titles.choose_your_plan}
+
+    .cards
+      .card.card--wide
+        .card__inner-line
+        h3.text--rotated.text--expert #{$t.titles.expert}
+        .card__inner-contaiter--column
+          .card__inner-container--row
+            ul.card__list
+              li.card__list-item Google Reviews
+              li.card__list-item Google Reviews
+              li.card__list-item Facebook
+              li.card__list-item Booking.com
+              li.card__list-item Tripadvisor
+            ul.card__list
+              li.card__list-item 2GIS
+              li.card__list-item Foursquare
+              li.card__list-item Google Reviews
+              li.card__list-item Google Reviews
+              li.card__list-item Google Reviews
+          .card__price-block
+            p.text--price #{$t.text.price_num}&#x20;
+              span.text--price-period.text--light-grey #{$t.text.price_period}
+            button.btn.btn--primary.btn--price #{$t.buttons.try}
+
+      .card.card--wide
+        h3.text--rotated.text--professional #{$t.titles.professional}
+        .card__inner-line
+        h3 #{$t.titles.more_than_10_locations}
+        p #{$t.text.contact_us}
+         .card__price-block
+          p.text--price-period.text--light-grey Цена договорная
+          button.btn.btn--primary.btn--price #{$t.buttons.write_us}
+
+    .plans__note
+      p.text.text--xxsmall * #{$t.text.onlyGoogle}
+      p.text.text--xxsmall ** #{$t.text.one_location}

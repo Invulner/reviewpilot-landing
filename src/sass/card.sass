@@ -1,5 +1,6 @@
 $card__margin: 20px
 $card__tablet-margin: 10px
+$card-wide-side-padding: 130px
 
 .cards
   display: flex
@@ -81,3 +82,70 @@ $card__tablet-margin: 10px
   @media (max-width: 767px)
     width: 90px
     height: 80px
+
+.card--wide
+  width: calc((100% - 2 * 2 * #{$card__margin}) / 2)
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  min-height: 300px
+
+  &:first-of-type
+    padding: 30px 60px 30px $card-wide-side-padding
+
+  &:nth-of-type(2)
+    padding: 60px 60px 30px $card-wide-side-padding
+
+  & h3
+    font-size: 30px
+    margin-bottom: 0
+
+  @media (max-width: 1200px)
+    width: 100%
+
+.card__list
+  &:first-of-type
+    margin-right: 60px
+
+.card__list-item
+  padding-left: 20px
+  position: relative
+  font-size: 16px
+  line-height: 22px
+  font-family: 'Gilroy', sans-serif
+  font-weight: 100
+  margin-bottom: 15px
+
+  &::before
+    content: ''
+    position: absolute
+    left: 0
+    top: 50%
+    transform: translateY(-50%)
+    width: 10px
+    height: 10px
+    color: #111316
+    background-image: url('../images/icons/checkmark-pink.png')
+    background-size: contain
+    background-repeat: no-repeat
+
+.card__inner-container--row
+  display: flex
+
+.card__price-block
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin-top: auto
+
+.card__inner-contaiter--column
+  display: flex
+  flex-direction: column
+
+.card__inner-line
+  position: absolute
+  width: 1px
+  top: 0
+  bottom: 0
+  background-color: #000
+  left: calc(#{$card-wide-side-padding} - 50px)
