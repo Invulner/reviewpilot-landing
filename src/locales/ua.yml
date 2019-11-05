@@ -14,6 +14,12 @@ titles:
   free_trial: Спробуйте безкоштовно
   google_my_business: Google My Business
   listen_to_clients: Прислухайтесь до думки своїх клієнтів
+  plans: Таріфи
+  choose_your_plan: Виберіть відповідний таріфний план
+  expert: Експерт
+  professional: Професіонал
+  more_than_10_locations: Больше 10 локацій?
+  realtime__feedback: Отримуйте зворотній зв'язок від гостей в реальному часі.
 links:
   how_it_works: Як це працює
   advantages: Переваги
@@ -44,5 +50,20 @@ text:
     Читайте та аналізуйте всі відгуки ваших клієнтів в одному додатку та покращуйте свій бізнес
   fill_the_form: Заповніть форму для отримання безкоштовного доступу
   we_will_get_in_touch: Дякуємо за інтерес до нашого сервісу. Ми зв'яжемось з вами найближчим часом.
+  contact_us: Зв'яжіться з нами
+  negotiated price: Договорна ціна
+  price_num: 450 грн
+  price_period: /місяц
+  onlyGoogle: только для Google / Google My Business
+  one_location: за одну локацию
+  post_qr_code_review: >
+    С помощью QR-кода гость может отправить вам сообщение о проблеме, не покидая заведения.
 buttons:
   get_demo: Отримати демо
+  write_us: Написати
+  try: Спробувати
+plan_items:
+  direct_reviews: Прямі відгуки
+  analytics: Аналітика
+  reports: Звіти
+  responses_to_reviews: Відповіді на відгуки

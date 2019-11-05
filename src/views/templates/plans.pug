@@ -10,7 +10,7 @@ section#plans.section
         .card__conteiner--outer
           .card__conteiner--inner
             ul.card__list
-              li.card__list-item Google Reviews
+              li.card__list-item #{$t.plan_items.direct_reviews}
               li.card__list-item Google Reviews
               li.card__list-item Facebook
               li.card__list-item Booking.com
@@ -18,12 +18,12 @@ section#plans.section
             ul.card__list
               li.card__list-item 2GIS
               li.card__list-item Foursquare
-              li.card__list-item Google Reviews
-              li.card__list-item Google Reviews
-              li.card__list-item Google Reviews
+              li.card__list-item #{$t.plan_items.analytics}
+              li.card__list-item #{$t.plan_items.reports}
+              li.card__list-item #{$t.plan_items.responses_to_reviews}*
           .card__price-block
             p.text--price #{$t.text.price_num}&#x20;
-              span.text--price-period.text--light-grey #{$t.text.price_period}
+              span.text--price-period.text--light-grey #{$t.text.price_period}**
             button.btn.btn--primary.btn--price #{$t.buttons.try}
 
       .card.card--wide
@@ -33,7 +33,7 @@ section#plans.section
           h3.card__heading #{$t.titles.more_than_10_locations}
           p #{$t.text.contact_us}
           .card__price-block
-            p.text--price-period.text--light-grey Цена договорная
+            p.text--price-period.text--light-grey #{$t.text.negotiated_price}
             button.btn.btn--primary.btn--price #{$t.buttons.write_us}
 
     .plans__note
