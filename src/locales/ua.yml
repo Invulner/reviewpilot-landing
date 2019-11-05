@@ -54,10 +54,10 @@ text:
   negotiated price: Договорна ціна
   price_num: 450 грн
   price_period: /місяц
-  onlyGoogle: только для Google / Google My Business
-  one_location: за одну локацию
+  onlyGoogle: тільки для Google / Google My Business
+  one_location: за одну локацію
   post_qr_code_review: >
-    С помощью QR-кода гость может отправить вам сообщение о проблеме, не покидая заведения.
+    За допомогою QR-коду гість може повідомити вам про проблему, не залишаючи закладу.
 buttons:
   get_demo: Отримати демо
   write_us: Написати
