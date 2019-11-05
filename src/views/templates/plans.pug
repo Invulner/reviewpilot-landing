@@ -5,10 +5,10 @@ section#plans.section
 
     .cards
       .card.card--wide
-        .card__inner-line
-        h3.text--rotated.text--expert #{$t.titles.expert}
-        .card__inner-contaiter--column
-          .card__inner-container--row
+        .card__header
+          h3.card__heading.card__heading--rotated #{$t.titles.expert}
+        .card__conteiner--outer
+          .card__conteiner--inner
             ul.card__list
               li.card__list-item Google Reviews
               li.card__list-item Google Reviews
@@ -27,13 +27,14 @@ section#plans.section
             button.btn.btn--primary.btn--price #{$t.buttons.try}
 
       .card.card--wide
-        h3.text--rotated.text--professional #{$t.titles.professional}
-        .card__inner-line
-        h3 #{$t.titles.more_than_10_locations}
-        p #{$t.text.contact_us}
-         .card__price-block
-          p.text--price-period.text--light-grey Цена договорная
-          button.btn.btn--primary.btn--price #{$t.buttons.write_us}
+        .card__header
+          h3.card__heading.card__heading--rotated #{$t.titles.professional}
+        .card__conteiner--outer
+          h3.card__heading #{$t.titles.more_than_10_locations}
+          p #{$t.text.contact_us}
+          .card__price-block
+            p.text--price-period.text--light-grey Цена договорная
+            button.btn.btn--primary.btn--price #{$t.buttons.write_us}
 
     .plans__note
       p.text.text--xxsmall * #{$t.text.onlyGoogle}

@@ -86,22 +86,45 @@ $card-wide-side-padding: 130px
 .card--wide
   width: calc((100% - 2 * 2 * #{$card__margin}) / 2)
   display: flex
-  flex-direction: column
-  justify-content: space-between
   min-height: 300px
+  padding: 0
 
-  &:first-of-type
-    padding: 30px 60px 30px $card-wide-side-padding
-
-  &:nth-of-type(2)
-    padding: 60px 60px 30px $card-wide-side-padding
-
-  & h3
-    font-size: 30px
-    margin-bottom: 0
-
-  @media (max-width: 1200px)
+  @media (max-width: 1024px)
     width: 100%
+
+  @media (max-width: 1024px)
+    text-align: left
+
+  @media (max-width: 767px)
+    flex-direction: column
+
+.card__header
+  position: relative
+  width: 90px
+  border-right: 1px solid #000
+
+  @media (max-width: 767px)
+    width: 100%
+    border-right: none
+    border-bottom: 1px solid #000
+    text-align: center
+
+.card__heading
+  font-size: 30px
+
+.card__heading--rotated
+  position: absolute
+  top: 0
+  right: 100%
+  margin-right: -20px
+  margin-top: 30px
+  transform: rotate(270deg)
+  transform-origin: top right
+
+  @media (max-width: 767px)
+    position: static
+    transform: none
+    margin-right: 0
 
 .card__list
   &:first-of-type
@@ -129,8 +152,11 @@ $card-wide-side-padding: 130px
     background-size: contain
     background-repeat: no-repeat
 
-.card__inner-container--row
+.card__conteiner--inner
   display: flex
+
+  @media (max-width: 450px)
+    flex-direction: column
 
 .card__price-block
   display: flex
@@ -138,14 +164,22 @@ $card-wide-side-padding: 130px
   align-items: center
   margin-top: auto
 
-.card__inner-contaiter--column
+  @media (max-width: 600px)
+    flex-direction: column
+    margin-top: 20px
+
+.card__conteiner--outer
   display: flex
   flex-direction: column
+  padding: 30px 60px
+  width: 100%
 
-.card__inner-line
-  position: absolute
-  width: 1px
-  top: 0
-  bottom: 0
-  background-color: #000
-  left: calc(#{$card-wide-side-padding} - 50px)
+  @media (max-width: 1280px)
+    padding: 20px 40px
+
+  @media (max-width: 1024px)
+    padding: 30px 60px
+
+  @media (max-width: 600px)
+    padding: 20px
+    align-items: center

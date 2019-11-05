@@ -4,11 +4,12 @@ section#advantages.section.section--no-border
     h2.short-heading #{$t.titles.work_effectively}
 
     .section__columns
-      .section__column
-        img.icon.icon--new
+      .section__column.section__column--centered
+        .icon.icon--new
         h3 #{$t.titles.realtime__feedback}
         p #{$t.text.post_qr_code_review}
-      .section__column
+      .section__column.mobile-hidden
+        img.section__column-image(src="./images/phone-qr.png")
 
     .cards
       .card.card--all-in-one

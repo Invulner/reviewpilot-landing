@@ -45,26 +45,23 @@
 .text--light
   color: #fff
 
-.text--rotated
-  position: absolute
-  left: 0
-  top: 10%
-  transform-origin: top right
-
-.text--expert
-  transform: rotate(270deg) translateY(-250%)
-
-.text--professional
-  transform: rotate(270deg) translateY(-450%)
-
 .text--price
   font-size: 30px
   line-height: 30px
   color: $pink
 
+  @media (max-width: 1280px)
+    font-size: 24px
+
 .text--price-period
   font-size: 17px
   line-height: 30px
+
+  @media (max-width: 1280px)
+    font-size: 14px
+
+  @media (max-width: 1024px)
+    font-size: 17px
 
 .text--light-grey
   opacity: .5
