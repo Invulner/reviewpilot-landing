@@ -137,7 +137,7 @@ $card-wide-side-padding: 130px
   line-height: 22px
   font-family: 'Gilroy', sans-serif
   font-weight: 100
-  margin-bottom: 15px
+  margin-bottom: 10px
 
   &::before
     content: ''
@@ -152,7 +152,7 @@ $card-wide-side-padding: 130px
     background-size: contain
     background-repeat: no-repeat
 
-.card__conteiner--inner
+.card__container--inner
   display: flex
 
   @media (max-width: 450px)
@@ -168,7 +168,7 @@ $card-wide-side-padding: 130px
     flex-direction: column
     margin-top: 20px
 
-.card__conteiner--outer
+.card__container--outer
   display: flex
   flex-direction: column
   padding: 30px 60px
@@ -183,3 +183,9 @@ $card-wide-side-padding: 130px
   @media (max-width: 600px)
     padding: 20px
     align-items: center
+
+.card__btn
+  width: 50%
+
+  @media (max-width: 600px)
+    margin-top: 15px

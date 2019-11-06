@@ -7,8 +7,8 @@ section#plans.section
       .card.card--wide
         .card__header
           h3.card__heading.card__heading--rotated #{$t.titles.expert}
-        .card__conteiner--outer
-          .card__conteiner--inner
+        .card__container--outer
+          .card__container--inner
             ul.card__list
               li.card__list-item #{$t.plan_items.direct_reviews}
               li.card__list-item Google Reviews
@@ -23,18 +23,18 @@ section#plans.section
               li.card__list-item #{$t.plan_items.responses_to_reviews}*
           .card__price-block
             p.text--price #{$t.text.price_num}&#x20;
-              span.text--price-period.text--light-grey #{$t.text.price_period}**
-            button.btn.btn--primary.btn--price #{$t.buttons.try}
+              span.text.text--price-period.white-grey #{$t.text.price_period}**
+            button.btn.btn--primary.card__btn #{$t.buttons.try}
 
       .card.card--wide
         .card__header
           h3.card__heading.card__heading--rotated #{$t.titles.professional}
-        .card__conteiner--outer
+        .card__container--outer
           h3.card__heading #{$t.titles.more_than_10_locations}
           p #{$t.text.contact_us}
           .card__price-block
-            p.text--price-period.text--light-grey #{$t.text.negotiated_price}
-            button.btn.btn--primary.btn--price #{$t.buttons.write_us}
+            p.text.text--price-period.white-grey #{$t.text.negotiated_price}
+            button.btn.btn--primary.card__btn #{$t.buttons.write_us}
 
     .plans__note
       p.text.text--xxsmall * #{$t.text.onlyGoogle}
