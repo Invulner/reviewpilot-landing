@@ -20,11 +20,12 @@ titles:
   professional: Професіонал
   more_than_10_locations: Больше 10 локацій?
   realtime__feedback: Отримуйте зворотній зв'язок від гостей в реальному часі.
+  our_clients: Наші клієнти
 links:
   how_it_works: Як це працює
   advantages: Переваги
   clients: Наші клієнти
-  get_demo: Отримати демо
+  get_demo: Спробувати безкоштовно
 placeholders:
   email: Електронна адреса
   phone: Телефон
@@ -59,7 +60,7 @@ text:
   post_qr_code_review: >
     За допомогою QR-коду гість може повідомити вам про проблему, не залишаючи закладу.
 buttons:
-  get_demo: Отримати демо
+  get_demo: Спробувати безкоштовно
   write_us: Написати
   try: Спробувати
 plan_items:

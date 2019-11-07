@@ -24,7 +24,12 @@ section#plans.section
           .card__price-block
             p.text--price #{$t.text.price_num}&#x20;
               span.text.text--price-period.white-grey #{$t.text.price_period}**
-            button.btn.btn--primary.card__btn #{$t.buttons.try}
+            button.btn.btn--primary.card__btn(
+              data-toggle="modal"
+              data-target="#demo-modal"
+              data-keyboard="true"
+            )
+              | #{$t.buttons.try}
 
       .card.card--wide
         .card__header
@@ -34,7 +39,12 @@ section#plans.section
           p #{$t.text.contact_us}
           .card__price-block
             p.text.text--price-period.white-grey #{$t.text.negotiated_price}
-            button.btn.btn--primary.card__btn #{$t.buttons.write_us}
+            button.btn.btn--primary.card__btn(
+              data-toggle="modal"
+              data-target="#demo-modal"
+              data-keyboard="true"
+            )
+              |  #{$t.buttons.write_us}
 
     .plans__note
       p.text.text--xxsmall * #{$t.text.onlyGoogle}
