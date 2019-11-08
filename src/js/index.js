@@ -14,6 +14,7 @@ function toggleHeader() {
 window.addEventListener('scroll', toggleHeader)
 
 window.addEventListener('load', (e) => {
+  localStorage.setItem('currentLang', 'ru')
   const dropdownBtn = document.querySelector('.header__lang-link')
   const dropdown = document.querySelector('.header__dropdown')
   const body = document.querySelector('body')
