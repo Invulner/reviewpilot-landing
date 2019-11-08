@@ -63,7 +63,7 @@ buttons:
   write_us: Написати
   try: Спробувати
 plan_items:
-   direct_reviews: Прямі відгуки
+  direct_reviews: Прямі відгуки
   analytics: Аналітика
   reports: Звіти
   responses_to_reviews: Відповіді на відгуки
