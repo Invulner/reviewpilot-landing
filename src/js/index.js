@@ -36,7 +36,6 @@ window.addEventListener('load', (e) => {
   })
 
   dropdownBtn.addEventListener('click', (e) => {
-    e.preventDefault()
     e.stopPropagation()
     toggleDropdown()
   })
@@ -59,14 +58,17 @@ window.addEventListener('load', (e) => {
       val: 'Укр'
     }
   ]
+
   const defaultLanguage = {
     key: 'ru',
     val: 'Рус'
   }
+
   const currentLang = languages.find(lang => window.location.href.includes(lang.key)) || defaultLanguage
 
   document.querySelectorAll('.footer__lang-list-link').forEach(link => {
-    if (link.href.includes(currentLang.key)) {
+
+    if (link.dataset.lang == currentLang.key) {
       link.classList.add('footer__lang-list-link--active')
     }
   })
