@@ -3,16 +3,16 @@ $footer__link-side-tablet-padding: 18px
 $footer__link-side-mobile-padding: 14px
 
 .footer
+  color: #fff
   background-color: #000
-  height: 126px
-  display: flex
   align-items: center
-
-  @media (max-width: 1024px)
-    height: 80px
+  padding-top: 40px
+  @media (max-width: 767px)
+    padding-top: 20px
 
 .footer__container
   display: flex
+  flex-wrap: wrap
   justify-content: space-between
   width: 100%
   align-items: center
@@ -25,7 +25,7 @@ $footer__link-side-mobile-padding: 14px
   display: flex
 
 .footer__social-list
-  margin-left: -$footer__link-side-padding
+  flex-wrap: wrap
 
   @media (max-width: 1024px)
     margin-left: -$footer__link-side-tablet-padding
@@ -34,8 +34,6 @@ $footer__link-side-mobile-padding: 14px
     margin-left: 0
 
 .footer__lang-list
-  margin-right: -$footer__link-side-padding
-
   @media (max-width: 1024px)
     margin-right: -$footer__link-side-tablet-padding
 
@@ -46,7 +44,8 @@ $footer__link-side-mobile-padding: 14px
   display: block
   color: #fff
   font-size: 20px
-  padding: 10px $footer__link-side-padding
+  padding: 0 $footer__link-side-padding 0 0
+  line-height: 50px
   transition: .1s
 
   &:hover
@@ -86,3 +85,10 @@ $footer__link-side-mobile-padding: 14px
 
 .footer__lang-list-link--active
   color: #fff
+
+.footer__copyright
+  margin-top: 40px
+  padding: 20px 0
+  border-top: 1px #777 solid
+  flex-basis: 100%
+  font-size: 14px
