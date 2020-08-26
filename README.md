@@ -1,5 +1,5 @@
 ### Setup dependencies
-    npm install
+    yarn install
 
 ### Install gulp globally(if neccessary)
     npm install gulp -D
